@@ -8,7 +8,9 @@ export const userService = {
     logout,
     register,
     getLocations,
-    deleteLocation
+    deleteLocation,
+    addLocation,
+    editLocation
 };
 
 function login(username, password) {
@@ -56,15 +58,55 @@ export function deleteLocation(id){
     };
     return fetch(`${base}/locations/${id}`, requestOptions).then(handleResponse);
 }
+export function addLocation(location){
+    let jwt = localStorage.getItem('jwt_token');
+    let body = JSON.stringify(location);
+    const requestOptions = {
+        method: 'POST',
+        mode:'cors',
+        body:body,
+        headers: { Authorization: 'Bearer ' + jwt, "Content-Type": "application/json" },
+    };
+    return fetch(`${base}/locations/`, requestOptions).then(handleResponse);
+}
+
+export function editLocation(location){
+    let jwt = localStorage.getItem('jwt_token');
+    let body = JSON.stringify(location);
+    const requestOptions = {
+        method: 'PATCH',
+        mode:'cors',
+        body:body,
+        headers: { Authorization: 'Bearer ' + jwt, "Content-Typer": "application/json" },
+    };
+    return fetch(`${base}/locations/${location._id}`, requestOptions).then(handleResponse);
+}
+
+function getSelf(){
+    let jwt = localStorage.getItem('jwt_token');
+    const requestOptions = {
+        method: 'GET',
+        mode:'cors',
+        headers: { Authorization: 'Bearer ' + jwt },
+    };
+    return fetch(`${base}/users/me`, requestOptions).then(handleResponse);
+}
+
+
 
 function handleResponse(response) {
     return response.text().then(text => {
         console.log(text);
+        if (response.status === 401){
+            console.log('rejected');
+            return Promise.reject();
+        }
         if (response.method === "OPTIONS"){
 
         }
         if (response.status === 200){
             const data = text && JSON.parse(text);
+            console.log('accepted');
             if (!response.ok) {
                 /*if (response.status === 401) {
                     // auto logout if 401 response returned from api
@@ -77,7 +119,12 @@ function handleResponse(response) {
             if (data.jwt){
                 //alert(data.jwt);
                 localStorage.setItem('jwt_token', data.jwt);
+                getSelf();
                 //router.push('/locations');
+            }
+            if(data.role){
+                localStorage.setItem('role', data.role);
+                console.log(localStorage.getItem('role'));
             }
             return Promise.resolve(data);
         }

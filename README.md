@@ -18,10 +18,10 @@ access all features
 ✅ USR3 : As a logged-in user, I want to see locations and be able to click on one location to
 open a modal containing details, so that the website is useful
 
-❌ USR4 : : As an “admin" user, I want to see a “Add Location” button in the location page, so
+✅ USR4 : : As an “admin" user, I want to see a “Add Location” button in the location page, so
 that I can create a new location
 
-❌ USR5 : As an “admin" user, I want to see a button to edit locations in the array of locations,
+✅ USR5 : As an “admin" user, I want to see a button to edit locations in the array of locations,
 so that I can edit existing locations
 
 ✅ USR6 : As an “admin" user, I want to see a button to delete locations in the array of

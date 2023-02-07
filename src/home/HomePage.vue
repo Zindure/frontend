@@ -1,5 +1,7 @@
 <template>
-
+<div>
+  <button v-on:click="$router.push('/login')">Locations</button>
+</div>
 </template>
 
 <script>
@@ -12,7 +14,6 @@ export default {
         })
     },
     mounted () {
-      router.push('/login')
     },
     methods: {
     }

@@ -13,14 +13,12 @@ const actions = {
         userService.login(username, password)
             .then(
                 user => {
-                    commit('loginSuccess', user);
                     router.push('/locations');
-                },
-                error => {
-                    commit('loginFailure', error);
-                    dispatch('alert/error', error, { root: true });
-                }
-            );
+                })
+            .catch(error => {
+                dispatch('alert/error', error, { root: true });
+            });
+
     },
     logout({ commit }) {
         userService.logout();
