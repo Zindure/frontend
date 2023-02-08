@@ -3,9 +3,8 @@
 ## 👷 Steps
 
 1. Install dependencies : `npm install`
-2. Run node in ssl `$env:NODE_OPTIONS = "--openssl-legacy-provider"`
+2. Run node in legacy `$env:NODE_OPTIONS = "--openssl-legacy-provider"`
 3. Run the backend `npm start`
-4. open chrome without cors `"[PATH_TO_CHROME]\chrome.exe" --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp` and go to http://localhost:8080/
 
 User stories : 
 
@@ -26,5 +25,3 @@ so that I can edit existing locations
 
 ✅ USR6 : As an “admin" user, I want to see a button to delete locations in the array of
 locations so that I can delete existing locations
-
-I had trouble understanding the CORS errors I was getting, and from what I understand, it was caused by having front and backend, on the same machine, which should only be an issue in development. I therefore didn't think it problematic to deacctivate cors when using chrome.
