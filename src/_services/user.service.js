@@ -1,7 +1,7 @@
 import config from 'config';
 import {authHeader, router} from '../_helpers';
 //import {post} from "./api";
-const base = 'http://localhost:3000';
+const base = 'https://secure-web-dev-backend-mg2u.onrender.com';
 
 export const userService = {
     login,
@@ -16,8 +16,8 @@ export const userService = {
 function login(username, password) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }),
+        headers: { 'Content-Type': 'application/json' }
     };
     return fetch(`${base}/users/login`, requestOptions).then(handleResponse);
 
@@ -42,8 +42,7 @@ function register(user) {
 export function getLocations(jwt) {
     const requestOptions = {
         method: 'GET',
-        mode:'cors',
-        headers: { Authorization: 'Bearer ' + jwt, "Access-Control-Allow-Origin": "*","Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS" ,"Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With" },
+        headers: { Authorization: 'Bearer ' + jwt},
     };
     return fetch(`${base}/locations?offset=0&limit=100`, requestOptions).then(handleResponse);
 
@@ -54,7 +53,7 @@ export function deleteLocation(id){
     const requestOptions = {
         method: 'DELETE',
         mode:'cors',
-        headers: { Authorization: 'Bearer ' + jwt, "Content-Typer": "application/json" },
+        headers: { Authorization: 'Bearer ' + jwt},
     };
     return fetch(`${base}/locations/${id}`, requestOptions).then(handleResponse);
 }
@@ -63,7 +62,6 @@ export function addLocation(location){
     let body = JSON.stringify(location);
     const requestOptions = {
         method: 'POST',
-        mode:'cors',
         body:body,
         headers: { Authorization: 'Bearer ' + jwt, "Content-Type": "application/json" },
     };
@@ -86,7 +84,6 @@ function getSelf(){
     let jwt = localStorage.getItem('jwt_token');
     const requestOptions = {
         method: 'GET',
-        mode:'cors',
         headers: { Authorization: 'Bearer ' + jwt },
     };
     return fetch(`${base}/users/me`, requestOptions).then(handleResponse);

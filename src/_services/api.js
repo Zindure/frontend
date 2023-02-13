@@ -1,4 +1,4 @@
-const base = 'http://localhost:3000';
+const base = 'https://secure-web-dev-backend-mg2u.onrender.com';
 
 async function send({ method, path, data, token }) {
     const opts = { method, headers: {} };
